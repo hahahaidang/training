@@ -1,0 +1,39 @@
+#docker-compose.yml
+
+version: "2"
+
+services:
+
+	demo:
+		image: tumtum/apache-php
+		links:
+			- mysql
+		ports:
+			- "8888:80"
+		networks:
+			- back-tier
+		volumes:
+			- .:var/www/html/demo
+		environment:
+			- ALLOW_OVERRIDE=true
+		hostname: demo
+		cpu_shares: 512             # 0.5 CPU
+        mem_limit: 536870912        # 512 MB RAM
+
+    mysql:
+    	image: mysql
+    	ports:
+    		- "3307:3306"
+    	networks:
+    		- back-tier
+    	volumes:
+    		./mysql-data/:/var/lib/mysql/
+    	environment:
+    		- MYSQL_ROOT_PASSWORD=root
+    		- MYSQL_DATABASE=demo
+    	hostname: mysql
+    	cpu_shares: 512             # 0.5 CPU
+        mem_limit: 536870912        # 512 MB RAM
+
+network:
+	back-tier:

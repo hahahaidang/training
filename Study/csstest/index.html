@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test css</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+	<div class="top">
+		<div class="row">
+			<div class="nav">
+				Messenge: <label id="messenge"></label>
+			</div>
+			<div class="close">
+				<i class="fa fa-close"></i>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="father">
+			<div class="child">
+				
+			</div>
+		</div>
+		<div class="father">
+			<div class="child">
+				<p id="text" onclick="myFunction()">Setting the width of the element will prevent it from stretching out to the edges of its container.
+
+The element will then take up the specified width, and the remaining space will be split equally between the two margins:
+
+				</p>
+			</div>
+		</div>
+				<div class="father">
+			
+		</div>
+				<div class="father">
+			
+		</div>
+				<div class="father">
+			
+		</div>
+				<div class="father">
+			
+		</div>
+				<div class="father">
+			
+		</div>
+		<div class="father">
+			
+		</div>
+		<div class="father">
+			
+		</div>
+		<div class="father">
+			
+		</div>
+	</div>
+<script type="text/javascript">
+	var myFunction = function(){
+		var text;
+		text = document.getElementById('text').textContent;
+		document.getElementById('messenge').innerHTML += text;
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+body{
+	font-family: "Time New Roman", Times, serif;
+}
+
+.header{
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 40px;
+	text-align: center;
+	background-color: DarkGray;
+}
+
+.content-swap{
+
+	margin: 50px;
+	clear: both;
+	display: flex;
+}
+
+.menu{
+/*	float: left;*/
+	width: 20%;
+	background-color: DarkGray;
+	text-align: center;
+	padding: 5px;
+	margin: 5px;
+}
+
+.content{
+/*	float: left;*/
+	width: 80%;
+	background-color: Gainsboro;
+	padding: 5px;
+	margin: 5px;
+}
+
+.footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 40px;
+	text-align: center;
+	background-color: DarkGray;
+}
+
+.father{
+	width: 200px;
+	height: 300px;
+	background-color: Violet;
+	float: left;
+	margin: 10px 0px 10px 10px;
+}
+.child{
+
+	width: 90%;
+	height: 90%;
+	/*margin-top: 20px;*/
+	margin: 10px auto;
+	border:3px dashed green;
+	background-color: Tomato;
+	text-align: left;
+	padding: 5px;
+
+
+}
+
+.child:hover{
+	background-color: yellow;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th{
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

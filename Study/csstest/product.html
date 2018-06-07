@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Product Javascript demo</title>
+		<link rel="stylesheet" type="text/css" href="productstyle.css">
+</head>
+<body>
+	<div class="header">
+		<p>header</p>
+	</div>
+
+	<div class="content-swap">
+		<div class="menu">
+			<p><button type="button" onclick="showProduct()">Product</button></p>
+			<p><button type="button" onclick="manageProduct()">Manage Product</button></p>
+		</div>
+		<div class="content" id="content">
+			<p>content</p>
+		</div>
+	</div>
+
+	<div class="footer">
+		<p>footer</p>
+	</div>
+	<script type="text/javascript">
+
+		 function product(){
+			var id;
+			var name;
+			var price;
+			var description;
+			this.getId = function(){
+				return id;
+			}
+			this.setId = function(iID){
+				id = iID;
+			}
+			this.getName = function(){
+				return name;
+			}
+			this.setName = function(iName){
+				name = iName;
+			}
+			this.getPrice = function(){
+				return price;
+			}
+			this.setPrice = function(iPrice){
+				price = iPrice;
+			}
+			this.getDescription = function(){
+				return description;
+			}
+			this.setDescription = function(iDescription){
+				description = iDescription;
+			}
+		}
+		// product.prototye.testMethod = function(){
+
+		// }
+		// var productTest = {
+		// 	methodA: function(){},
+		// 	varA: '11111',
+		// }
+		// pro
+		var listProduct = [];
+		for(iLoop = 1;iLoop<10;iLoop++){
+			var id = "PR"+iLoop;
+			var name = "san pham"+iLoop;
+			var price = iLoop+"000";
+			var description = "San pham tot "+iLoop;
+			var products = new product();
+			products.setId(id);
+			products.setName(name);
+			products.setPrice(price);
+			products.setDescription(description);
+			listProduct.push(products);
+		}
+		var searchIndexProduct = function(id){
+			var index;
+			for(index = 0; index<listProduct.length; index++){
+				if(listProduct[index].getId() == id){
+					return index;
+				}
+			}
+			return null;
+		}
+		var createProduct = function(id, name, price, description){
+			var index = searchIndexProduct(id);
+			if(index != null){
+				console.log('Id product exist');
+				return;
+			}
+			var products = new product();
+			products.setId(id);
+			products.setName(name);
+			products.setPrice(price);
+			products.setDescription(description);
+			listProduct.push(products);
+			refreshManageProduct();
+		}
+		var updateProduct = function(id, name, price, description){
+			var index = searchIndexProduct(id);
+			if (index == null){
+				console.log('product not exist');
+				return;
+			}
+			listProduct[index].setName(name);
+			listProduct[index].setPrice(price);
+			listProduct[index].setDescription(description);
+			console.log(id);	
+			console.log('updated');	
+			refreshManageProduct();		
+		}
+		var deleteProduct = function(id){
+			var index = searchIndexProduct(id);
+			if (index == null){
+				console.log('product not exist');
+				return;
+			}
+			listProduct.splice(index,1);
+			console.log('deleted');
+			refreshManageProduct();
+		}
+		console.log(listProduct);
+		var showProduct = function(){
+			if (listProduct.length != 0){
+				console.log("vao if");
+				document.getElementById('content').innerHTML = "";
+				var parent = document.getElementById('content');
+				for(index=0;index<listProduct.length;index++){
+					var id = listProduct[index].getId();
+					var name = listProduct[index].getName();
+					var price = listProduct[index].getPrice();
+					var description = listProduct[index].getDescription();
+					var html = '<div class="father"><div class="child"><p>Ma SP: '+id+'</p><p>Ten SP: '+name+'</p><p>Gia: '+price+'</p><p>Mo ta: '+description+'</p></div></div>';
+					parent.insertAdjacentHTML("beforeend",html);
+			}
+				}
+			}
+			else{
+				var text = "empty";
+				document.getElementById('content').innerHTML = text;
+			}
+		}
+		var doAddSubmit = function(){
+			var id = document.getElementById('add-id').value;
+			var name = document.getElementById('add-name').value;
+			var price = document.getElementById('add-price').value;
+			var description = document.getElementById('add-description').value;
+			createProduct(id, name, price, description);
+		}
+		var showAddProduct = function(){
+			document.getElementById('content').innerHTML = "";
+			var html = '<h2>Product Add</h2>';
+			html = html + '<form>';
+			html = html + 'Product ID:';
+			html = html + '<input type="text" id="add-id">';
+			html = html + '</input>';
+			html = html + '<br>';
+			html = html + 'Product Name:';
+			html = html + '<input type="text" id="add-name">';
+			html = html + '</input>';
+			html = html + '<br>';
+			html = html + 'Product Price:';
+			html = html + '<input type="text" id="add-price">';
+			html = html + '</input>';
+			html = html + '<br>';
+			html = html + 'Product Description:';
+			html = html + '<input type="text" id="add-description">';
+			html = html + '</input>';
+			html = html + '<br>';
+			html = html + '<input type="button" value="Add" onclick="doAddSubmit()"></input>'
+			html = html + '</form>';
+			console.log(html);
+			var parent = document.getElementById('content');
+			parent.insertAdjacentHTML("beforeend",html);
+		}
+		var doEditSubmit = function(){
+			var id = document.getElementById('edit-id').value;
+			var name = document.getElementById('edit-name').value;
+			var price = document.getElementById('edit-price').value;
+			var description = document.getElementById('edit-description').value;
+			console.log(name);
+			updateProduct(id, name, price, description);
+
+		}
+		var showEditProduct = function(id, name, price, description){
+			document.getElementById('content').innerHTML = "";
+			var html = '<h2>Product Add</h2>';
+			html = html + '<form>';
+			html = html + 'Product ID:';
+			html = html + '<input type="text" id="edit-id" value="'+id+'" disabled>';
+			html = html + '</input>';
+			html = html + '<br>';
+			html = html + 'Product Name:';
+			html = html + '<input type="text" id="edit-name" value="'+name+'">';
+			html = html + '</input>';
+			html = html + '<br>';
+			html = html + 'Product Price:';
+			html = html + '<input type="text" id="edit-price" value="'+price+'">';
+			html = html + '</input>';
+			html = html + '<br>';
+			html = html + 'Product Description:';
+			html = html + '<input type="text" id="edit-description" value="'+description+'">';
+			html = html + '</input>';
+			html = html + '<br>';
+			html = html + '<input type="button" value="Update" onclick="doEditSubmit()"></input>'
+			html = html + '</form>';
+			console.log(id);
+			var parent = document.getElementById('content');
+			parent.insertAdjacentHTML("beforeend",html);
+		}
+		var refreshManageProduct = function(){
+			document.getElementById('content').innerHTML = "";
+			var html = '<h2>Product management <button onclick="showAddProduct()"><h2>ADD</h2></button></h2>';
+			html  = html + '<table>';
+			html  = html + '<tr>';
+			html = html + '<th>';
+			html = html + 'Product ID</th>';
+			html = html + '<th>';
+			html = html + 'Product Name</th>';
+			html = html + '<th>';
+			html = html + 'Edit</th>';
+			html = html + '<th>';
+			html = html + 'Delete</th>';
+			html  = html + '</tr>';
+
+			for(index=0; index<listProduct.length;index++){
+				var id = listProduct[index].getId();
+				var name = listProduct[index].getName();
+				var price = listProduct[index].getPrice();
+				var description = listProduct[index].getDescription();
+				html  = html + '<tr>';
+				html  = html + '<td>';
+				html  = html + id + '</td>';
+				html  = html + '<td>';
+				html  = html + name + '</td>';
+				html  = html + '<td>';
+				html  = html + '<button onclick="showEditProduct(\''+ id +'\',\''+ name +'\',\''+ price +'\',\''+ description +'\')">Edit</button></td>';
+				html  = html + '<td>';
+				html  = html + '<button onclick="deleteProduct(\''+ id +'\')">Delete</button></td>';
+				html  = html + '</tr>';			
+			}
+			html  = html + '</table>';
+			console.log(html);
+			var parent = document.getElementById('content');
+			parent.insertAdjacentHTML("beforeend",html);
+		}
+		var manageProduct = function(){
+			refreshManageProduct();
+		}
+	</script>
+</body>
+</html>
+
+

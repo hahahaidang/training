@@ -1,0 +1,115 @@
+version: '2'
+
+services:
+  
+  app:
+    build:
+      context: ./
+      dockerfile: app.docker
+    volumes:
+      - ./:/app
+    ports:
+      - "8081:8000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    
+  #not use nginx for laravel
+  # web:
+  #   build:
+  #     context: ./
+  #     dockerfile: web.docker
+  #   working_dir: /var/www/
+  #   volumes_from:
+  #     - app
+  #   ports:
+  #     - "8080:80"
+    # links:
+    #   - app
+    #   - db
+
+  
+  db:
+    image: mysql:5.7.22
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data/:/var/lib/mysql/
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  mysql-data:
+    driver: local
+
+
+
+ # version: '2'
+ # services: 
+ #  app:
+ #    build:
+ #      context: ./
+ #      dockerfile: app.dockerfile
+ #    working_dir: /var/www
+ #    volumes:
+ #      - ./:/var/www
+ #      - /var/www/vendor
+ #      - /var/www/node_modules
+ #    environment:
+ #      - "DB_PORT=3306"
+ #      - "DB_HOST=cage-db-instance.cnkkondq9pzm.ap-southeast-1.rds.amazonaws.com"
+ #  web:
+ #    build:
+ #      context: ./
+ #      dockerfile: web.dockerfile
+ #    working_dir: /var/www
+ #    volumes_from:
+ #      - app
+ #    ports:
+ #      - 80:80
+
+
+
+
+
+ # version: '2'
+ # services: 
+ #  app:
+ #    build:
+ #      context: ./
+ #      dockerfile: app.dockerfile
+ #    working_dir: /var/www
+ #    volumes:
+ #      - ./:/var/www
+ #      - /var/www/vendor
+ #      - /var/www/node_modules
+
+ #  mysql:
+ #    image: mysql
+ #    ports:
+ #      - "3306:3306"
+ #    volumes:
+ #      - .mysql-data/:/var/lib/mysql/
+ #    environment:
+ #      - MYSQL_ROOT_PASSWORD: root
+ #      - MYSQL_DATABASE: demo
+
+ #  phpmyadmin:
+ #    image: phpmyadmin/phpmyadmin
+ #    links:
+ #      - mysql:mysql
+ #    ports:
+ #      - 8080:80
+ #    environment:
+ #      - MYSQL_USERNAME: root
+
+ #  web:
+ #    build:
+ #      context: ./
+ #      dockerfile: web.dockerfile
+ #    working_dir: /var/www
+ #    volumes_from:
+ #      - app
+ #    ports:
+ #      - 80:80

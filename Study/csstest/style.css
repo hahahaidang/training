@@ -1,0 +1,60 @@
+body{
+	font-family: "Time New Roman", Times, serif;
+	/*height: 100px;*/
+}
+.top{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 20px;
+	width: 100%;
+	text-align: center;
+	float: left;
+	
+
+}
+.nav{
+	width: 90%;
+	float: left;
+	background-color: Tomato;
+}
+.close{
+	width:10%;
+	float: left;
+	background-color: Violet;
+	text-align: right;
+}
+
+.content{
+	
+	overflow: scroll;
+	max-height: 300px;
+	float: left;
+	text-align: center;
+	background-color:  DodgerBlue;
+	margin: 30px;
+
+}
+.father{
+	width: 200px;
+	height: 300px;
+	background-color: Violet;
+	float: left;
+	margin: 10px 0px 10px 10px;
+}
+.child{
+
+	width: 90%;
+	height: 90%;
+	/*margin-top: 20px;*/
+	margin: 10px auto;
+	border:3px dashed green;
+	background-color: Tomato;
+	text-align: center;
+
+
+}
+
+.child:hover{
+	background-color: yellow;
+}

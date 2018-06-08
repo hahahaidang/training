@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price',9,3);
             $table->integer('discount');
             $table->longText('description');
-            $table->unsignedInteger('id_catology');
+            $table->unsignedInteger('id_catelogy');
             $table->foreign('id_catelogy')->references('id')->on('catelogies');
             $table->timestamps();
         });

@@ -10,11 +10,21 @@ class PageController extends Controller
 {
     public function index(){
     	//$products = product::all();
-    	$products = DB::table('products')->simplePaginate(4);
+    	$products = DB::table('products')->paginate(8);
 
     	//return $products;
 
     	return view('index',compact('products'));
 
+    }
+
+    public function data(){
+    	$data = [
+    		'name' => 'Akira',
+    		'age' => '5'
+    	];
+    	return response()->json(
+    		$data
+    	);
     }
 }

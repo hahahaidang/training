@@ -23,6 +23,10 @@ Route::get('/',[
 	'as' => 'index',
 	'uses' => 'PageController@index'
 ]);
+Route::get('data',[
+	'as' => 'data',
+	'uses' => 'PageController@data'
+]);
 // Route::get('',[
 // 	'as' => '',
 // 	'uses' => ''
@@ -60,3 +64,6 @@ Route::resource('product','ProductController');
 // 	'as' => 'store-product',
 // 	'uses' => 'ProductController@store'
 // ]);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
